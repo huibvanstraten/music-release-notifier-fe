@@ -1,0 +1,38 @@
+<form class="user-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <!-- Username Field -->
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" formControlName="username" />
+    <div *ngIf="userForm.get('username')?.touched && userForm.get('username')?.invalid" class="error-msg">
+      Username is required
+    </div>
+  </div>
+
+  <!-- Artist Search Section -->
+  <div *ngIf="userForm.get('username')?.valid" class="artist-search-section">
+    <div [formGroup]="artistSearchForm">
+      <label for="artistName">Search Artist:</label>
+      <input type="text" id="artistName" formControlName="artistName" />
+      <button type="button" (click)="searchArtist()" [disabled]="artistSearchForm.get('artistName')?.invalid">
+        Add Artist
+      </button>
+    </div>
+    <!-- Error Message for Artist Search -->
+    <div *ngIf="artistError" class="error-msg">
+      {{ artistError }}
+    </div>
+
+    <!-- List of Added Artists -->
+    <ul>
+      <li *ngFor="let artist of artistList; let i = index">
+        {{ artist.name }}
+        <button type="button" (click)="removeArtist(i)">Remove</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" [disabled]="userForm.invalid || artistList.length === 0">
+    Submit
+  </button>
+</form>
