@@ -9,29 +9,23 @@ import {Artist} from './artist';
   providedIn: 'root'
 })
 export class ArtistSelectorService {
-  url: string = 'http://localhost:8080/api/v1/artist'
+  artistUrl: string = 'http://localhost:8080/api/v1/artist'
+  userUrl: string = 'http://localhost:8080/api/v1/user'
 
   constructor(private httpClient: HttpClient) { }
 
   createUser(user: User): Observable<void> {
-    let params = new HttpParams().set('username', user.username);
-    user.artistIdList.forEach((artistId) => {
-      params = params.append('artistIdList', artistId);
-    });
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
-
-    return this.httpClient.post<void>(`${this.url}/user`, null, {
-      params: params,
-      headers: headers,
-    });
+    return this.httpClient.post<void>(
+      `${this.userUrl}/list`,
+      user,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+    );
   }
+
 
   getArtist(artistName: string): Observable<Artist> {
     let params = new HttpParams().set('artistName', artistName);
 
-    return this.httpClient.get<Artist>(this.url, {params: params });
+    return this.httpClient.get<Artist>(`${this.artistUrl}/name`, {params: params });
   }
 }

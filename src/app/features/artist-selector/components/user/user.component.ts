@@ -27,19 +27,17 @@ export class UserComponent {
   artistList: Artist[] = [];
   artistError: string | null = null;
 
-  // URL for the getArtist API
-  private url: string = 'https://api.example.com/getArtist'; // Replace with actual URL
 
   constructor(
     private formBuilder: FormBuilder,
     private artistSelectorService: ArtistSelectorService
   ) {
-    // Initialize the main user form
+
     this.userForm = this.formBuilder.group({
       username: ['', Validators.required]
     });
 
-    // Initialize the artist search form
+
     this.artistSearchForm = this.formBuilder.group({
       artistName: ['', Validators.required]
     });
@@ -54,7 +52,7 @@ export class UserComponent {
 
     this.artistSelectorService.getArtist(artistName).subscribe({
       next: (artist: Artist) => {
-        const exists = this.artistList.some(a => a.streamingId === artist.streamingId);
+        const exists = this.artistList.some(a => a.artistId === artist.artistId);
         if (exists) {
           this.artistError = 'Artist is already added.';
         } else {
@@ -74,22 +72,15 @@ export class UserComponent {
     });
   }
 
-  /**
-   * Removes an artist from the artistList based on the index.
-   * @param index The index of the artist to remove.
-   */
   removeArtist(index: number): void {
     this.artistList.splice(index, 1);
   }
 
-  /**
-   * Handles the form submission by sending the user data.
-   */
   onSubmit(): void {
     if (this.userForm.valid && this.artistList.length > 0) {
       const user: User = {
         username: this.userForm.get('username')?.value,
-        artistIdList: this.artistList.map(artist => artist.streamingId)
+        artistIdList: this.artistList.map(artist => artist.artistId)
       };
 
       this.artistSelectorService.createUser(user).subscribe({
