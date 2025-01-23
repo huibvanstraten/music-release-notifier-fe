@@ -1,0 +1,23 @@
+.logout-widget {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 999;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+
+  button {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 0.3rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}

@@ -1,9 +1,17 @@
 <div class="gradient-bg">
   <div class="text-container">Music Release Monitor</div>
-  <!-- 1. The form as a separate component -->
-  <app-user></app-user>
 
-  <!-- 2. The SVG for goo filter (must be in DOM) -->
+  <!-- 1. Conditionally display app-user or app-auth-widget -->
+  <!-- Suppose 'isLoggedIn' is a boolean in your .ts file that you set based on Keycloak auth status. -->
+  <ng-container *ngIf="isLoggedIn(); else authTemplate">
+    <app-user></app-user>
+    <app-log-off-widget></app-log-off-widget>
+  </ng-container>
+  <ng-template #authTemplate>
+    <app-auth-widget></app-auth-widget>
+  </ng-template>
+
+  <!-- 2. The SVG for goo filter (must be in the DOM) -->
   <svg xmlns="http://www.w3.org/2000/svg">
     <defs>
       <filter id="goo">
@@ -25,7 +33,6 @@
     <div class="g2"></div>
     <div class="g3"></div>
     <div class="g4"></div>
-<!--    <div class="g5"></div>-->
-    <!-- .interactive if desired -->
+    <!-- <div class="g5"></div> -->
   </div>
 </div>

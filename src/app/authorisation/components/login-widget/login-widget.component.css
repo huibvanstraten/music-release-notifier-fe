@@ -1,0 +1,27 @@
+.login-widget {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  z-index: 2;
+
+  transform: translate(-50%, -50%) scale(2);
+  transform-origin: center;
+
+  padding: 1rem 2rem;
+  border-radius: 8px;
+
+  button {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}

@@ -1,14 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {UserComponent} from './features/artist-selector/components/user/user.component';
-import {GradientBgComponent} from './features/artist-selector/components/gradient-bg/gradient-bg.component';
+import {PkceLoginService} from './authorisation/pkce-login.service';
 
 @Component({
+  standalone: true,
   selector: 'app-root',
-  imports: [GradientBgComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Music Release Notifier';
+export class AppComponent implements OnInit{
+
+  constructor(private pkceLoginService: PkceLoginService) {
+  }
+
+  ngOnInit(): void {
+    this.pkceLoginService.initiateAuth()
+  }
 }

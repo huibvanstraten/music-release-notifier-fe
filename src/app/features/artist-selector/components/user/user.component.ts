@@ -9,6 +9,7 @@ import { NgForOf, NgIf } from '@angular/common';
 import {Artist} from '../../artist';
 import {User} from '../../user';
 import {ArtistSelectorService} from '../../artist-selector.service';
+import {PkceLoginService} from '../../../../authorisation/pkce-login.service';
 
 @Component({
   selector: 'app-user',
@@ -30,11 +31,14 @@ export class UserComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private artistSelectorService: ArtistSelectorService
+    private artistSelectorService: ArtistSelectorService,
+    private pkceLoginService: PkceLoginService,
   ) {
 
+    const claims = pkceLoginService.oauthService.getIdentityClaims()
+
     this.userForm = this.formBuilder.group({
-      username: ['', Validators.required]
+      username: [{ value: claims['preferred_username'], disabled: true }, Validators.required],
     });
 
 
