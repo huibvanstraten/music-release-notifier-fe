@@ -2,16 +2,13 @@
   <div>
     <label for="username">Username:</label>
     <input type="text" id="username" formControlName="username" />
-    <div *ngIf="userForm.get('username')?.touched && userForm.get('username')?.invalid" class="error-msg">
-      Username is required
-    </div>
   </div>
 
   <div class="artist-search-section">
     <div [formGroup]="artistSearchForm">
       <label for="artistName">Search Artist:</label>
       <input type="text" id="artistName" formControlName="artistName" />
-      <button type="button" (click)="searchArtist()" [disabled]="artistSearchForm.get('artistName')?.invalid">
+      <button type="button" (click)="searchArtist()">
         Add Artist
       </button>
     </div>

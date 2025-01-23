@@ -38,12 +38,12 @@ export class UserComponent {
     const claims = pkceLoginService.oauthService.getIdentityClaims()
 
     this.userForm = this.formBuilder.group({
-      username: [{ value: claims['preferred_username'], disabled: true }, Validators.required],
+      username: [{ value: claims['preferred_username'], disabled: true }],
     });
 
 
     this.artistSearchForm = this.formBuilder.group({
-      artistName: ['', Validators.required]
+      artistName: ['']
     });
   }
 
@@ -80,16 +80,18 @@ export class UserComponent {
     this.artistList.splice(index, 1);
   }
 
+  // TODO: somehow form is invalid when reaching this point. in html still valid
   onSubmit(): void {
-    if (this.userForm.valid && this.artistList.length > 0) {
+    console.log(this.userForm.getRawValue())
+    // if (this.userForm.valid && this.artistList.length > 0) {
       const user: User = {
+        userId: this.pkceLoginService.oauthService.getIdentityClaims()['sub'],
         username: this.userForm.get('username')?.value,
         artistIdList: this.artistList.map(artist => artist.artistId)
       };
 
       this.artistSelectorService.createUser(user).subscribe({
-        next: (response) => {
-          console.log("User created successfully:", response);
+        next: () => {
           this.userForm.reset();
           this.artistList = [];
         },
@@ -99,5 +101,5 @@ export class UserComponent {
         }
       });
     }
-  }
+  // }
 }
