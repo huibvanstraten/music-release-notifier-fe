@@ -4,13 +4,15 @@ import {User} from './user';
 import {Observable} from 'rxjs';
 import {Artist} from './artist';
 import {PkceLoginService} from '../../authorisation/pkce-login.service';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArtistSelectorService {
-  artistUrl: string = 'http://localhost:8080/api/v1/artist'
-  userUrl: string = 'http://localhost:8080/api/v1/user'
+  baseUrl: string = environment.baseUrl
+  artistUrl: string = this.baseUrl + '/api/v1/artist'
+  userUrl: string = this.baseUrl + '/api/v1/user'
   token: string = ""
 
   constructor(private httpClient: HttpClient, private pkce: PkceLoginService) { }
