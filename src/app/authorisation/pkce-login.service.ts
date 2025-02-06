@@ -1,9 +1,10 @@
 import {inject, Injectable} from '@angular/core';
 import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
+import {environment} from '../../environments/environment';
 
 
 export const authConfig: AuthConfig = {
-  issuer: 'http://localhost:7080/realms/music-release-notifier',
+  issuer: environment.keycloakBaseUrl +'/realms/music-release-notifier',
   redirectUri: window.location.origin,
   clientId: 'music-release-notifier-fe',
   responseType: 'code',

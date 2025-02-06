@@ -1,3 +1,4 @@
 export const environment = {
-  baseUrl: 'http://localhost:8080'
+  coreServiceBaseUrl: 'http://localhost:8080',
+  keycloakBaseUrl: 'http://localhost:7080'
 };

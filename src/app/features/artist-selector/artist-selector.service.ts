@@ -10,7 +10,7 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class ArtistSelectorService {
-  baseUrl: string = environment.baseUrl
+  baseUrl: string = environment.coreServiceBaseUrl
   artistUrl: string = this.baseUrl + '/api/v1/artist'
   userUrl: string = this.baseUrl + '/api/v1/user'
   token: string = ""
