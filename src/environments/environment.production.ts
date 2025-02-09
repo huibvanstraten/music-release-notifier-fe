@@ -1,4 +1,5 @@
 export const environment = {
-  baseUrl: 'http://someurl.nl',
-  keycloakBaseUrl: 'http://someurl.nl'
+  isProduction: true,
+  baseUrl: 'https://someurl.nl',
+  keycloakBaseUrl: 'https://someurl.nl'
 };
